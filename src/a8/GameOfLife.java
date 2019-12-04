@@ -132,15 +132,15 @@ public class GameOfLife extends JFrame implements ActionListener {
 			System.exit(0);
 		} else if (ae.getSource().equals(fileOptions)) {
 			// Put up an options panel to change the number of moves per second
-			final JFrame fOptions = new JFrame();
-			fOptions.setTitle("Options");
-			fOptions.setSize(300, 60);
-			fOptions.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - fOptions.getWidth()) / 2,
-					(Toolkit.getDefaultToolkit().getScreenSize().height - fOptions.getHeight()) / 2);
-			fOptions.setResizable(false);
+			final JFrame Options = new JFrame();
+			Options.setTitle("Options");
+			Options.setSize(300, 60);
+			Options.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - Options.getWidth()) / 2,
+					(Toolkit.getDefaultToolkit().getScreenSize().height - Options.getHeight()) / 2);
+			Options.setResizable(false);
 			JPanel pOptions = new JPanel();
 			pOptions.setOpaque(false);
-			fOptions.add(pOptions);
+			Options.add(pOptions);
 			pOptions.add(new JLabel("Number of moves per second:"));
 			Integer[] secondOptions = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
 					23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,
@@ -154,18 +154,18 @@ public class GameOfLife extends JFrame implements ActionListener {
 				@Override
 				public void actionPerformed(ActionEvent ae) {
 					iMovesPerSecond = (Integer) cbSeconds.getSelectedItem();
-					fOptions.dispose();
+					Options.dispose();
 				}
 			});
-			fOptions.setVisible(true);
+			Options.setVisible(true);
 		} else if (ae.getSource().equals(gameSize)) {
-			JFrame fSize = new JFrame();
-			fSize.setTitle("Size");
-			fSize.setSize(300, 60);
-			fSize.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - fSize.getWidth()) / 2,
-					(Toolkit.getDefaultToolkit().getScreenSize().height - fSize.getHeight()) / 2);
-			fSize.setResizable(false);
-			fSize.setResizable(false);
+			JFrame Size = new JFrame();
+			Size.setTitle("Size");
+			Size.setSize(300, 60);
+			Size.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - Size.getWidth()) / 2,
+					(Toolkit.getDefaultToolkit().getScreenSize().height - Size.getHeight()) / 2);
+			Size.setResizable(false);
+			Size.setResizable(false);
 			JPanel pSize = new JPanel();
 			JSlider slider = new JSlider(10, 500);
 			slider.setMinorTickSpacing(10);
@@ -181,18 +181,18 @@ public class GameOfLife extends JFrame implements ActionListener {
 			});
 			pSize.add(slider);
 			pSize.setOpaque(false);
-			fSize.add(pSize);
-			fSize.setVisible(true);
+			Size.add(pSize);
+			Size.setVisible(true);
 		} else if (ae.getSource().equals(fileRules)) {
-			JFrame fRules = new JFrame();
-			fRules.setTitle("Rules");
-			fRules.setSize(300, 60);
-			fRules.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - fRules.getWidth()) / 2,
-					(Toolkit.getDefaultToolkit().getScreenSize().height - fRules.getHeight()) / 2);
-			fRules.setResizable(false);
+			JFrame Rules = new JFrame();
+			Rules.setTitle("Rules");
+			Rules.setSize(300, 60);
+			Rules.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - Rules.getWidth()) / 2,
+					(Toolkit.getDefaultToolkit().getScreenSize().height - Rules.getHeight()) / 2);
+			Rules.setResizable(false);
 			JPanel pRules = new JPanel();
 			pRules.setOpaque(false);
-			fRules.add(pRules);
+			Rules.add(pRules);
 			pRules.add(new JLabel("Low Birth Threshold:"));
 			JTextField textField1 = new JTextField(10);
 			pRules.add(textField1);
@@ -215,7 +215,7 @@ public class GameOfLife extends JFrame implements ActionListener {
 					highBirth = Integer.parseInt(textField2.getText());
 					lowSurvive = Integer.parseInt(textField3.getText());
 					lowSurvive = Integer.parseInt(textField3.getText());
-					fRules.dispose();
+					Rules.dispose();
 				}
 			});
 			Object[] options = { apply };
@@ -229,7 +229,7 @@ public class GameOfLife extends JFrame implements ActionListener {
 			if (result == JOptionPane.YES_OPTION) {
 				JOptionPane.showMessageDialog(null, textField.getText());
 			}
-			fRules.dispose();
+			Rules.dispose();
 
 		} else if (ae.getSource().equals(gameAutofill)) {
 			int max = 100;
@@ -257,7 +257,7 @@ public class GameOfLife extends JFrame implements ActionListener {
 	}
 
 	private class GameBoard extends JPanel implements ComponentListener, MouseListener, MouseMotionListener, Runnable {
-		private Dimension dGameBoardSize = null;
+		private Dimension GameBoardSize = null;
 		private ArrayList<Point> point = new ArrayList<Point>(0);
 
 		public GameBoard() {
@@ -270,7 +270,7 @@ public class GameOfLife extends JFrame implements ActionListener {
 		private void updateArraySize() {
 			ArrayList<Point> removeList = new ArrayList<Point>(0);
 			for (Point current : point) {
-				if ((current.x > dGameBoardSize.width - 1) || (current.y > dGameBoardSize.height - 1)) {
+				if ((current.x > GameBoardSize.width - 1) || (current.y > GameBoardSize.height - 1)) {
 					removeList.add(current);
 				}
 			}
@@ -288,7 +288,7 @@ public class GameOfLife extends JFrame implements ActionListener {
 		public void addPoint(MouseEvent me) {
 			int x = me.getPoint().x / BLOCK_SIZE - 1;
 			int y = me.getPoint().y / BLOCK_SIZE - 1;
-			if ((x >= 0) && (x < dGameBoardSize.width) && (y >= 0) && (y < dGameBoardSize.height)) {
+			if ((x >= 0) && (x < GameBoardSize.width) && (y >= 0) && (y < GameBoardSize.height)) {
 				addPoint(x, y);
 			}
 		}
@@ -302,8 +302,8 @@ public class GameOfLife extends JFrame implements ActionListener {
 		}
 
 		public void randomlyFillBoard(int percent) {
-			for (int i = 0; i < dGameBoardSize.width; i++) {
-				for (int j = 0; j < dGameBoardSize.height; j++) {
+			for (int i = 0; i < GameBoardSize.width; i++) {
+				for (int j = 0; j < GameBoardSize.height; j++) {
 					if (Math.random() * 100 < percent) {
 						addPoint(i, j);
 					}
@@ -325,12 +325,12 @@ public class GameOfLife extends JFrame implements ActionListener {
 			}
 			// Setup grid
 			g.setColor(Color.BLACK);
-			for (int i = 0; i <= dGameBoardSize.width; i++) {
+			for (int i = 0; i <= GameBoardSize.width; i++) {
 				g.drawLine(((i * BLOCK_SIZE) + BLOCK_SIZE), BLOCK_SIZE, (i * BLOCK_SIZE) + BLOCK_SIZE,
-						BLOCK_SIZE + (BLOCK_SIZE * dGameBoardSize.height));
+						BLOCK_SIZE + (BLOCK_SIZE * GameBoardSize.height));
 			}
-			for (int i = 0; i <= dGameBoardSize.height; i++) {
-				g.drawLine(BLOCK_SIZE, ((i * BLOCK_SIZE) + BLOCK_SIZE), BLOCK_SIZE * (dGameBoardSize.width + 1),
+			for (int i = 0; i <= GameBoardSize.height; i++) {
+				g.drawLine(BLOCK_SIZE, ((i * BLOCK_SIZE) + BLOCK_SIZE), BLOCK_SIZE * (GameBoardSize.width + 1),
 						((i * BLOCK_SIZE) + BLOCK_SIZE));
 			}
 		}
@@ -338,7 +338,7 @@ public class GameOfLife extends JFrame implements ActionListener {
 		@Override
 		public void componentResized(ComponentEvent e) {
 			// Setup the game board size with proper boundaries
-			dGameBoardSize = new Dimension(getWidth() / BLOCK_SIZE - 2, getHeight() / BLOCK_SIZE - 2);
+			GameBoardSize = new Dimension(getWidth() / BLOCK_SIZE - 2, getHeight() / BLOCK_SIZE - 2);
 			updateArraySize();
 		}
 
@@ -388,7 +388,7 @@ public class GameOfLife extends JFrame implements ActionListener {
 
 		@Override
 		public void run() {
-			boolean[][] gameBoard = new boolean[dGameBoardSize.width + 2][dGameBoardSize.height + 2];
+			boolean[][] gameBoard = new boolean[GameBoardSize.width + 2][GameBoardSize.height + 2];
 			for (Point current : point) {
 				if (torus && current.x == gameBoard[0].length - 3) {
 					current.x = 0;
